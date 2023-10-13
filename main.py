@@ -1,22 +1,19 @@
-import tkinter
-from tkinter import ttk
+from DB import DB
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
 
 baseDeAlunos = pd.read_csv("DB/BaseAlunos7.csv")
 baseDeDengue = pd.read_csv("DB/BaseDengue7.csv")
-baseDeOnibus = pd.read_csv("DB/BaseOnibus7.csv",encoding="cp1252")
+baseDeOnibus = pd.read_csv("DB/BaseOnibus7.csv", encoding="cp1252")
+#baseDeCidadoes = DB.adicionar(DB.adicionar(baseDeAlunos, baseDeDengue), baseDeOnibus)
 
-for x in len(baseDeAlunos["ID"]):
-    print(x)
+relatorioEducacao = DB.repetidos(baseDeAlunos, baseDeDengue)
+relatorioEducacao[["Nome", "Data de Nascimento", "ID"]].to_excel("Relatório Educação.xlsx")
 
+#BaseNaoOnibus = DB.repetidos(baseDeDengue, baseDeOnibus)
+#relatorioSaude = DB.repetidos(baseDeDengue, BaseNaoOnibus)
+#relatorioSaude[["Nome", "Data de Nascimento", "Data da Dengue"]].to_excel("Relatório Saúde.xlsx")
 
-root = tkinter.Tk()
-frm = ttk.Frame(root, padding=10)
-frm.grid()
-ttk.Label(frm, text="Olá Mundo!").grid(column=0, row=0)
-ttk.Button(frm, text="Sair", command=root.destroy).grid(column=1, row=0)
-root.mainloop()
+relatorioMobilidade = DB.repetidos(baseDeOnibus, baseDeDengue)
+relatorioMobilidade[["Nome", "Data de Nascimento", "Ônibus"]].to_excel("Relatório Mobilidade.xlsx")
 
-print(baseDeAlunos['Sexo'].value_counts(normalize = True) * 100)
+#RelatorioEducacaoeSaude =

@@ -1,0 +1,5 @@
+pandas
+matplotlib
+streamlit
+matplotlib_venn
+streamlit_option_menu

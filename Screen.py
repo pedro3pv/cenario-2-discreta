@@ -62,6 +62,7 @@ def render(DB1, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10):
 def screen_componets(DB1, DB2, DB3, G, Title, Label1, Label2):
     col1, col2, col3 = st.columns(3)
     col4, col5 = st.columns([4, 2])
+    col6, col7, col8 = st.columns(3)
     fig, ax = plt.subplots()
     venn2(subsets=(DB1.shape[0], DB2.shape[0], G),
           set_labels=(Label1, Label2, "G"),
@@ -73,6 +74,14 @@ def screen_componets(DB1, DB2, DB3, G, Title, Label1, Label2):
         st.dataframe(DB3,width=1200,height=525)
     with col5:
         st.pyplot(fig)
+    with col7:
+        with open("Relatorios/"+Title+".xlsx", "rb") as template_file:
+            template_byte = template_file.read()
+
+        st.download_button(label="Click to Download Excel File",
+                           data=template_byte,
+                           file_name=Title+".xlsx",
+                           mime='application/octet-stream')
 
 def screen_componets_venn3_unweighted(DB1, DB2 , DB4, DB7, G, Title, Label1, Label2, Label3):
     DB3 = DB.iguais(DB1, DB2)
@@ -80,6 +89,7 @@ def screen_componets_venn3_unweighted(DB1, DB2 , DB4, DB7, G, Title, Label1, Lab
     DB6 = DB.iguais(DB2, DB4)
     col1, col2, col3 = st.columns(3)
     col4, col5 = st.columns([3, 2])
+    col6, col7, col8 = st.columns(3)
     fig, ax = plt.subplots()
     venn3_unweighted(subsets=(DB1.shape[0], DB2.shape[0], DB3.shape[0], DB4.shape[0], DB5.shape[0], DB6.shape[0], G),
           set_labels=(Label1, Label2, Label3)
@@ -92,21 +102,11 @@ def screen_componets_venn3_unweighted(DB1, DB2 , DB4, DB7, G, Title, Label1, Lab
         st.dataframe(DB7,width=1200,height=525)
     with col5:
         st.pyplot(fig)
+    with col7:
+        with open("Relatorios/"+Title+".xlsx", "rb") as template_file:
+            template_byte = template_file.read()
 
-def screen_componets_venn3(DB1, DB2 , DB4, DB7, G, Title, Label1, Label2, Label3):
-    DB3 = DB.iguais(DB1, DB2)
-    DB5 = DB.iguais(DB1, DB4)
-    DB6 = DB.iguais(DB2, DB4)
-    col1, col2, col3 = st.columns(3)
-    col4, col5 = st.columns([3, 2])
-    fig, ax = plt.subplots()
-    venn3(subsets=(DB1.shape[0], DB2.shape[0], DB3.shape[0], DB4.shape[0], DB5.shape[0], DB6.shape[0], G),
-          set_labels=(Label1, Label2, Label3)
-          , ax=ax,
-          )
-    with col2:
-        st.write("# "+Title)
-    with col4:
-        st.dataframe(DB7,width=1200,height=525)
-    with col5:
-        st.pyplot(fig)
+        st.download_button(label="Click to Download Excel File",
+                           data=template_byte,
+                           file_name=Title+".xlsx",
+                           mime='application/octet-stream')

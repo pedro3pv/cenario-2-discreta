@@ -8,17 +8,6 @@ def repetidos(DB1, DB2):
     LengthDB1 = DB1.shape[0]
     LengthDB2 = DB2.shape[0]
 
-    DB1['Ônibus'] = DB1['Ônibus'].str.replace('"', '').str.split(', ')
-    bus_set_1 = set(DB1.loc[0, 'Ônibus'])
-
-    # Cria conjuntos de ônibus para DB2
-    bus_set_2 = set(DB2['Nome'])
-
-    # Cria o diagrama de Venn
-    venn2([bus_set_1, bus_set_2], set_labels=('DB1', 'DB2'))
-    plt.title('Diagrama de Venn dos Ônibus Usados por DB1 e DB2')
-    plt.show()
-
     loop = False
     x = 0
     y = 0

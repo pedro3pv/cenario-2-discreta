@@ -3,3 +3,4 @@ matplotlib
 streamlit
 matplotlib_venn
 streamlit_option_menu
+openpyxl

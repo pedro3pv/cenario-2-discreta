@@ -35,10 +35,10 @@ def render(DB1, DB2, DB3, DB4, DB5, DB6, DB7, DB8, DB9, DB10):
     if selected == "1 Relatório Educação":
         screen_componets(baseDeAlunos, baseDeDengue, DB1, baseDeAlunos.shape[0]-DB1.shape[0], "Relatório Educação", "frequenta a escola", "tiveram dengue")
     if selected == "2 Relatório Saúde":
-        BaseNaoOnibus = DB.iguais(baseDeDengue, baseDeOnibus)
+        BaseNaoOnibus = DB.repetidos(baseDeDengue, baseDeOnibus)
         screen_componets(baseDeDengue, BaseNaoOnibus, DB2, baseDeDengue.shape[0]-DB2.shape[0], "Relatório Saúde", "frequenta o posto de saúde", "não utilizam ônibus")
     if selected == "3 Relatório Mobilidade":
-        BasenaoDengue = DB.iguais(baseDeOnibus, baseDeDengue)
+        BasenaoDengue = DB.repetidos(baseDeOnibus, baseDeDengue)
         screen_componets(baseDeOnibus, BasenaoDengue, DB3, baseDeOnibus.shape[0]-DB3.shape[0], "Relatório Mobilidade", "utilizam o transporte público", "não tiveram dengue")
     if selected == "4 Relatório Educação e Saúde":
         screen_componets(baseDeAlunos, baseDeDengue, DB4, DB4.shape[0], "Relatório Educação e Saúde", "frequenta a escola", "tiveram dengue")
@@ -66,8 +66,7 @@ def screen_componets(DB1, DB2, DB3, G, Title, Label1, Label2):
     fig, ax = plt.subplots()
     venn2(subsets=(DB1.shape[0], DB2.shape[0], G),
           set_labels=(Label1, Label2, "G"),
-          ax=ax,
-          subset_label_formatter=lambda x: str(x) + "\n(" + f"{(x/(DB1.shape[0]+DB2.shape[0])):1.0%}" + ")")
+          ax=ax,)
     with col2:
         st.write("# "+Title)
     with col4:
@@ -93,9 +92,7 @@ def screen_componets_venn3_unweighted(DB1, DB2 , DB4, DB7, G, Title, Label1, Lab
     fig, ax = plt.subplots()
     venn3_unweighted(subsets=(DB1.shape[0], DB2.shape[0], DB3.shape[0], DB4.shape[0], DB5.shape[0], DB6.shape[0], G),
           set_labels=(Label1, Label2, Label3)
-          , ax=ax,
-            subset_label_formatter=lambda x: str(x) + "\n(" + f"{(x / (DB1.shape[0] + DB2.shape[0] + DB3.shape[0])):1.0%}" + ")"
-          )
+          , ax=ax,)
     with col2:
         st.write("# "+Title)
     with col4:

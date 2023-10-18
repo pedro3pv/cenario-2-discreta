@@ -18,7 +18,7 @@ relatorioEducacao = DB.repetidos(baseDeAlunos, baseDeDengue)
 relatorioEducacao[["Nome", "Data de Nascimento", "ID"]].to_excel("Relatorios/Relatório Educação.xlsx")
 
 #2
-BaseNaoOnibus = DB.iguais(baseDeDengue, baseDeOnibus)
+BaseNaoOnibus = DB.repetidos(baseDeDengue, baseDeOnibus)
 relatorioSaude = DB.repetidos(baseDeDengue, baseDeOnibus)
 relatorioSaude[["Nome", "Data de Nascimento", "Data da Dengue"]].to_excel("Relatorios/Relatório Saúde.xlsx")
 
